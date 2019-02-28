@@ -1,7 +1,7 @@
 <script>
-    RED.nodes.registerType('Notify',{
-        category: 'LINE',
-        color: '#1ad823',
+    RED.nodes.registerType('Follow',{
+        category: 'Twitter',
+        color: '#b8d9ea',
         defaults: {
             name: {value:""},
             AccessToken:{value:"", required:true}
@@ -11,12 +11,12 @@
         icon: "comment.png",
         align: "right",
         label: function() {
-            return this.name||"Notify";
+            return this.name||"Follow";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="Notify">
+<script type="text/x-red" data-template-name="Follow">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -25,12 +25,12 @@
     <div class="form-row">
         <label for="node-input-AccessToken">
             <i class="icon-tag"></i>
-            LINE Notify AccessToken
+            LINE Follow AccessToken
         </label>
-        <input type="text" id="node-input-AccessToken" placeholder="LINE Notify AccessToken">
+        <input type="text" id="node-input-AccessToken" placeholder="LINE Follow AccessToken">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Notify">
-    <p><a href="https://notify-bot.line.me/my/">LINE Notify</a>でアクセストークンを取得して設定して下さい。</p>
+<script type="text/x-red" data-help-name="Follow">
+    <p><a href="https://Follow-bot.line.me/my/">LINE Follow</a>でアクセストークンを取得して設定して下さい。</p>
 </script>

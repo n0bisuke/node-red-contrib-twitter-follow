@@ -13,8 +13,8 @@
   },
   "node-red": {
     "nodes": {
-      "Follow": "./twitter/follow/follow.js",
-      "FollowEvent": "./twitter/followevent/followevent.js"
+      "Follow": "./nodes/follow/follow.js",
+      "FollowEvent": "./nodes/followevent/followevent.js"
     }
   },
   "keywords": [
