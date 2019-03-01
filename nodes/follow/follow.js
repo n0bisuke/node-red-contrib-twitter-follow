@@ -42,5 +42,5 @@ module.exports = (RED) => {
 
     }
 
-    RED.nodes.registerType("Notify", main);
+    RED.nodes.registerType("Follow", main);
 }
