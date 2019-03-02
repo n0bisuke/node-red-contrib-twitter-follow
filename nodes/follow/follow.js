@@ -3,11 +3,6 @@ module.exports = (RED) => {
 
     const twitter = require('twitter');
     
-
-    console.log(`----`)
-    console.log(RED);
-    console.log(`----`)
-
     const main = function(config){
         const node = this;
         RED.nodes.createNode(node, config);

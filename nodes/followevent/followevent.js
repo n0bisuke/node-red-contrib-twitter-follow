@@ -26,18 +26,37 @@ module.exports = (RED) => {
         }
 
         node.on('input', async (msg) => {
+            let newestFollowerId = '';
             const mes = msg.payload;
-            try {
-                if(!msg.tweet) throw new Error('Tweetオブジェクトがありません。');
 
-                console.log(`[${msg.tweet.user.id_str}]${msg.tweet.user.name}さんをフォローしようとしています。`);
-                await client.post('friendships/create', {user_id: msg.tweet.user.id});
-                console.log(`${msg.tweet.user.name}さんをフォローしました。`);            
-            } catch (error) {
-                console.log(error);
+            const watchFollow = () => {
+                client.get(`followers/ids`, (error, tweets, response) => {
+                    if (!error) {
+                        //2回目以降かつnewestFollowerIdが差し代わった場合
+                        if(newestFollowerId !== '' && newestFollowerId !== JSON.parse(response.body).ids[0]){
+                            console.log(`new follower 「${newestFollowerId}」`);
+                            client.post(`friendships/create`, {user_id: newestFollowerId});
+                            console.log(`「${newestFollowerId}」 follow done`);
+                            client.get(`users/show`, {user_id: newestFollowerId}, (error, tweets, response) => {
+                                if (!error) {
+                                  console.log(tweets);
+                                  msg.tweet.user = tweets;
+                                }
+                            });
+                        }
+                        newestFollowerId = JSON.parse(response.body).ids[0];
+                        console.log(`newestFollowerId id ${newestFollowerId}`);
+                        console.log(`waiting...`);
+                        msg.payload = `waiting...`;
+                        node.send(msg);
+                        setTimeout(watchFollow, 1000 * 60);
+                    }else{
+                        console.log(error);
+                        console.log(`waiting retry...`);
+                        setTimeout(watchFollow, 1000 * 60 * 10); //10分後にリトライ
+                    }
+                });
             }
-            msg.payload = res.data;
-            node.send(msg);
         });
 
     }

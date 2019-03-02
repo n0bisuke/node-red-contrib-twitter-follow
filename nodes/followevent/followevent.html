@@ -4,9 +4,11 @@
         color: '#b8d9ea',
         defaults: {
             name: {value:""},
-            channelSecret:{value:"", required:true},
-            channelAccessToken:{value:"", required:true},
-            targetId:{value:"", required:true},
+            ConsumerKey:{value:"", required:true},
+            ConsumerSecret:{value:"", required:true},
+            AccessTokenKey:{value:"", required:true},
+            AccessTokenSecret:{value:"", required:true},
+            limit: {value:""}
         },
         inputs:0,
         outputs:1,
@@ -25,21 +27,44 @@
     </div>
 
     <div class="form-row">
-        <label for="node-input-channelSecret"><i class="icon-tag"></i> Secret</label>
-        <input type="text" id="node-input-channelSecret" placeholder="ChannelSecret">
+        <label for="node-input-limit"><i class="icon-tag"></i> Follow LIMIT per Hour</label>
+        <input type="text" id="node-input-Limit" placeholder="Limit">
     </div>
 
     <div class="form-row">
-        <label for="node-input-channelAccessToken"><i class="icon-tag"></i> AccessToken</label>
-        <input type="text" id="node-input-channelAccessToken" placeholder="ChannelAccessToken">
+        <label for="node-input-ConsumerKey">
+            <i class="icon-tag"></i>
+            Consumer Key
+        </label>
+        <input type="text" id="node-input-ConsumerKey" placeholder="Twitter ConsumerKey">
     </div>
 
     <div class="form-row">
-        <label for="node-input-targetId"><i class="icon-tag"></i> User Id or Group ID</label>
-        <input type="text" id="node-input-targetId" placeholder="User Id or Group ID">
+        <label for="node-input-ConsumerSecret">
+            <i class="icon-tag"></i>
+            Consumer Secret
+        </label>
+        <input type="text" id="node-input-ConsumerSecret" placeholder="Twitter ConsumerSecret">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-AccessTokenKey">
+            <i class="icon-tag"></i>
+            AccessToken
+        </label>
+        <input type="text" id="node-input-AccessTokenKey" placeholder="Twitter AccessToken">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-AccessTokenSecret">
+            <i class="icon-tag"></i>
+            AccessTokenSecret
+        </label>
+        <input type="text" id="node-input-AccessTokenSecret" placeholder="Twitter AccessTokenSecret">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="FollowEvent">
-    <p>A simple node that converts the message payloads into all ReplyMessage characters</p>
+    <p><a href="https://apps.twitter.com">Twitterアプリ登録から</a>でキーとトークンを取得して設定して下さい。</p>
+    <p>リミットには1時間あたりのフォロー回数の限界値を書いてください。あまり多いとTwitter側からブロックされてしまうかもしれません。デフォルトは1になってます。</p>
 </script>
