@@ -2,6 +2,10 @@ module.exports = (RED) => {
     'use strict';
 
     const twitter = require('twitter');
+    
+    let limitFlag = false; //分間のフォローリミット
+    setInterval(() => limitFlag = false,1000 * 60);
+
     console.log(`----`)
     console.log(RED);
     console.log(`----`)
@@ -10,9 +14,7 @@ module.exports = (RED) => {
         const node = this;
         RED.nodes.createNode(node, config);
         let twitterconfig;
-        console.log(`----`)
-        console.log(node.twitterConfig);
-        console.log(`----`)
+
         try {
             twitterconfig = require('../../env');
         } catch (error) {
@@ -32,17 +34,20 @@ module.exports = (RED) => {
         }
 
         node.on('input', async (msg) => {
-            const mes = msg.payload;
+            // const mes = msg.payload;
             try {
                 if(!msg.tweet) throw new Error('Tweetオブジェクトがありません。');
+                if(limitFlag) throw new Error('分間のリミットです');
 
                 console.log(`[${msg.tweet.user.id_str}]${msg.tweet.user.name}さんをフォローしようとしています。`);
                 await client.post('friendships/create', {user_id: msg.tweet.user.id});
-                console.log(`${msg.tweet.user.name}さんをフォローしました。`);            
+                console.log(`${msg.tweet.user.name}さんをフォローしました。`);
+                limitFlag = true;
+                msg.payload = `${msg.tweet.user.name}さんをフォローしました。`;
             } catch (error) {
                 console.log(error);
+                msg.payload = error;
             }
-            msg.payload = res.data;
             node.send(msg);
         });
 

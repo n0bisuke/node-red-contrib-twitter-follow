@@ -7,10 +7,11 @@
             ConsumerKey:{value:"", required:true},
             ConsumerSecret:{value:"", required:true},
             AccessTokenKey:{value:"", required:true},
-            AccessTokenSecret:{value:"", required:true}
+            AccessTokenSecret:{value:"", required:true},
+            limit: {value:""}
         },
         inputs:1,
-        outputs:0,
+        outputs:1,
         icon: "twitter.png",
         align: "right",
         label: function() {
@@ -23,6 +24,11 @@
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-limit"><i class="icon-tag"></i> Follow LIMIT per a minute</label>
+        <input type="text" id="node-input-Limit" placeholder="Limit">
     </div>
 
     <div class="form-row">

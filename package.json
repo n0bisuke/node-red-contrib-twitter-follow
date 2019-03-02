@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-twitter-follow",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Twitter Follow API",
   "main": "twitter.js",
   "repository": {
