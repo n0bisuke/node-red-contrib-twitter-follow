@@ -27,7 +27,7 @@
     </div>
 
     <div class="form-row">
-        <label for="node-input-limit"><i class="icon-tag"></i> Follow LIMIT per a minute</label>
+        <label for="node-input-limit"><i class="icon-tag"></i> Follow LIMIT per Hour</label>
         <input type="text" id="node-input-Limit" placeholder="Limit">
     </div>
 
@@ -66,4 +66,5 @@
 
 <script type="text/x-red" data-help-name="Follow">
     <p><a href="https://apps.twitter.com">Twitterアプリ登録から</a>でキーとトークンを取得して設定して下さい。</p>
+    <p>リミットには分間のフォロー回数の限界値を書いてください。あまり多いとTwitter側からブロックされてしまうかもしれません。デフォルトは1になってます。</p>
 </script>

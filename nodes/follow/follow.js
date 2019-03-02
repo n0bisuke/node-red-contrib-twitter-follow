@@ -12,9 +12,9 @@ module.exports = (RED) => {
         const node = this;
         RED.nodes.createNode(node, config);
 
-        let restFollowCount = 1; //分間のフォロー回数 残り
-        config.limit = (config.limit == '') ? 1 : config.limit; //分間のフォローリミット回数
-        setInterval(() => restFollowCount = config.limit,1000 * 60);
+        let restFollowCount = 1; //1時間あたりのフォロー回数 残り
+        config.limit = (config.limit == '') ? 1 : config.limit; //1時間あたりのフォローリミット回数
+        setInterval(() => restFollowCount = config.limit,1000 * 60 * 60);
 
         let twitterconfig;
         try {
@@ -50,6 +50,7 @@ module.exports = (RED) => {
                 console.log(error);
                 msg.payload = error;
             }
+
             node.send(msg);
         });
 
