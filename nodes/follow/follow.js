@@ -3,8 +3,6 @@ module.exports = (RED) => {
 
     const twitter = require('twitter');
     
-    let limitFlag = false; //分間のフォローリミット
-    setInterval(() => limitFlag = false,1000 * 60);
 
     console.log(`----`)
     console.log(RED);
@@ -13,8 +11,12 @@ module.exports = (RED) => {
     const main = function(config){
         const node = this;
         RED.nodes.createNode(node, config);
-        let twitterconfig;
 
+        let restFollowCount = 1; //分間のフォロー回数 残り
+        config.limit = (config.limit == '') ? 1 : config.limit; //分間のフォローリミット回数
+        setInterval(() => restFollowCount = config.limit,1000 * 60);
+
+        let twitterconfig;
         try {
             twitterconfig = require('../../env');
         } catch (error) {
@@ -37,12 +39,12 @@ module.exports = (RED) => {
             // const mes = msg.payload;
             try {
                 if(!msg.tweet) throw new Error('Tweetオブジェクトがありません。');
-                if(limitFlag) throw new Error('分間のリミットです');
+                if(restFollowCount <= 0) throw new Error('分間のリミットです');
 
                 console.log(`[${msg.tweet.user.id_str}]${msg.tweet.user.name}さんをフォローしようとしています。`);
                 await client.post('friendships/create', {user_id: msg.tweet.user.id});
                 console.log(`${msg.tweet.user.name}さんをフォローしました。`);
-                limitFlag = true;
+                restFollowCount--; //フォロー回数をカウントダウン
                 msg.payload = `${msg.tweet.user.name}さんをフォローしました。`;
             } catch (error) {
                 console.log(error);
