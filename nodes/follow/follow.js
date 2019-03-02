@@ -2,19 +2,25 @@ module.exports = (RED) => {
     'use strict';
 
     const twitter = require('twitter');
+    console.log(`----`)
+    console.log(RED);
+    console.log(`----`)
 
     const main = function(config){
         const node = this;
         RED.nodes.createNode(node, config);
         let twitterconfig;
+        console.log(`----`)
+        console.log(node.twitterConfig);
+        console.log(`----`)
         try {
             twitterconfig = require('../../env');
         } catch (error) {
             twitterconfig = { 
-                consumer_key: config.consumer_key,
-                consumer_secret: config.consumer_secret,
-                access_token_key: config.access_token_key,
-                access_token_secret: config.access_token_secret
+                consumer_key: config.ConsumerKey,
+                consumer_secret: config.ConsumerSecret,
+                access_token_key: config.AccessTokenKey,
+                access_token_secret: config.AccessTokenSecret
             };
         }
         

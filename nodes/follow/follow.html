@@ -4,11 +4,14 @@
         color: '#b8d9ea',
         defaults: {
             name: {value:""},
-            AccessToken:{value:"", required:true}
+            ConsumerKey:{value:"", required:true},
+            ConsumerSecret:{value:"", required:true},
+            AccessTokenKey:{value:"", required:true},
+            AccessTokenSecret:{value:"", required:true}
         },
         inputs:1,
         outputs:0,
-        icon: "comment.png",
+        icon: "twitter.png",
         align: "right",
         label: function() {
             return this.name||"Follow";
@@ -23,14 +26,38 @@
     </div>
 
     <div class="form-row">
-        <label for="node-input-AccessToken">
+        <label for="node-input-ConsumerKey">
             <i class="icon-tag"></i>
-            LINE Follow AccessToken
+            Consumer Key
         </label>
-        <input type="text" id="node-input-AccessToken" placeholder="LINE Follow AccessToken">
+        <input type="text" id="node-input-ConsumerKey" placeholder="Twitter ConsumerKey">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-ConsumerSecret">
+            <i class="icon-tag"></i>
+            Consumer Secret
+        </label>
+        <input type="text" id="node-input-ConsumerSecret" placeholder="Twitter ConsumerSecret">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-AccessTokenKey">
+            <i class="icon-tag"></i>
+            AccessToken
+        </label>
+        <input type="text" id="node-input-AccessTokenKey" placeholder="Twitter AccessToken">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-AccessTokenSecret">
+            <i class="icon-tag"></i>
+            AccessTokenSecret
+        </label>
+        <input type="text" id="node-input-AccessTokenSecret" placeholder="Twitter AccessTokenSecret">
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="Follow">
-    <p><a href="https://Follow-bot.line.me/my/">LINE Follow</a>でアクセストークンを取得して設定して下さい。</p>
+    <p><a href="https://apps.twitter.com">Twitterアプリ登録から</a>でキーとトークンを取得して設定して下さい。</p>
 </script>
